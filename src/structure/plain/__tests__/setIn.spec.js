@@ -23,6 +23,15 @@ describe('structure.plain.setIn', () => {
       .toBe('second')
   })
 
+  it('should create a map if state is undefined and key is number with dot syntax', () => {
+    const result = setIn(undefined, 'foo.100', 'fido')
+    expect(result)
+      .toNotBe(Array)
+      .toEqual({ foo: { 100: 'fido' } });
+    expect(Object.keys(result.foo).length)
+      .toBe(1)
+  })
+
   it('should set and shallow keys without mutating state', () => {
     const state = { foo: 'bar' }
     expect(setIn(state, 'foo', 'baz'))
